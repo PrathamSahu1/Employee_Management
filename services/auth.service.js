@@ -9,7 +9,7 @@ const secretKey = 'xyz123';
 
 const registerUser = async (userData) => {
     try {
-        const { name, email, password, role } = userData;
+        const { name, email, password, role, employeeId } = userData;
 
         // Check if any admin exists
         const adminExists = await User.findOne({ where: { role: 'admin' } });
@@ -25,7 +25,7 @@ const registerUser = async (userData) => {
         }
 
         // Directly create the user (password will be hashed via model hook)
-        const user = await User.create({ name, email, password, role });
+        const user = await User.create({ name, email, password, role, employeeId });
 
         logger.info(`New user registered with id ${user.id}`);
         return { message: 'User registered successfully' };
@@ -50,7 +50,7 @@ const loginUser = async (email, password) => {
         }
 
         // Generate JWT token
-        const token = jwt.sign({ id: user.id, role: user.role }, secretKey, { expiresIn: '1h' });
+        const token = jwt.sign({ id: user.id, role: user.role, employeeId: user.employeeId }, secretKey, { expiresIn: '1h' });
 
         return { message: "Successfully logged in", token };
     } catch (error) {
