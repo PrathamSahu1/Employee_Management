@@ -6,7 +6,7 @@ const userSchema = require('../../json-schemas/user.schema')
 const router = express.Router();
 
 router.post('/register',validationSchema(userSchema), register);
-router.post('/login',validationSchema(userSchema), login);
+router.post('/login', login);
 // router.delete('/delete', authenticate, deleteUser);
 
 module.exports = router;

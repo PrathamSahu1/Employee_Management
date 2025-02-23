@@ -7,7 +7,7 @@ const employeeSchema = require('../../json-schemas/employee.schema')
 
 const router = express.Router();
 
-router.get('/', authenticate, checkRole(['admin', 'manager']),validationSchema(employeeSchema), getEmployees);
+router.get('/', authenticate, checkRole(['admin', 'manager']), getEmployees);
 router.post('/', authenticate, checkRole(['admin', 'manager']),validationSchema(employeeSchema), addEmployee);
 
 module.exports = router;

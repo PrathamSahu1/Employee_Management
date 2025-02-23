@@ -10,9 +10,9 @@ const salaryHistorySchema = require('../../json-schemas/salary.schema')
 router.post('/', authenticate, checkRole(['admin', 'manager']),validationSchema(salaryHistorySchema), salaryHistoryController.addSalaryRecord);
 
 // Admin & Manager can get all salary records
-router.get('/all', authenticate, checkRole(['admin', 'manager']),validationSchema(salaryHistorySchema), salaryHistoryController.getAllSalaryRecords);
+router.get('/all', authenticate, checkRole(['admin', 'manager']), salaryHistoryController.getAllSalaryRecords);
 
 // Employees can view their own salary records
-router.get('/', authenticate, checkRole(['employee']),validationSchema(salaryHistorySchema), salaryHistoryController.getEmployeeSalaryRecords);
+router.get('/', authenticate, checkRole(['employee']), salaryHistoryController.getEmployeeSalaryRecords);
 
 module.exports = router;
