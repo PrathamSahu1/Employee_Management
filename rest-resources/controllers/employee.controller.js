@@ -22,5 +22,30 @@ const addEmployee = async (req, res) => {
     }
 };
 
+const updateEmployee = async (req, res) => {
+    try {
+        const { employeeId } = req.params;
+        const updatedEmployee = await employeeService.updateEmployee(employeeId, req.body);
 
-module.exports = {getEmployees,addEmployee}
+        res.status(200).json(new ApiResponse(200, updatedEmployee, 'Employee updated successfully'));
+    } catch (error) {
+        logger.error('Error updating employee: ' + error.message);
+        res.status(error.statusCode || 500).json({ error: error.message });
+    }
+};
+
+const deleteEmployee = async (req, res) => {
+    try {
+        const { employeeId } = req.params;
+        const result = await employeeService.deleteEmployee(employeeId);
+
+        res.status(200).json(new ApiResponse(200, result, 'Employee deleted successfully'));
+    } catch (error) {
+        logger.error('Error deleting employee: ' + error.message);
+        res.status(error.statusCode || 500).json({ error: error.message });
+    }
+};
+
+
+
+module.exports = {getEmployees,addEmployee,updateEmployee,deleteEmployee}

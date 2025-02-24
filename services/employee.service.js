@@ -24,4 +24,38 @@ const createEmployee = async (employeeData) => {
     }
 };
 
-module.exports = { getAllEmployees, createEmployee };
+const updateEmployee = async (employeeId,updateData) => {
+    try {
+        const employee = await Employee.findByPk(employeeId);
+    if (!employee) {
+        throw new ApiError(404, 'Employee not found');
+    }
+
+     const updatedEmployee = await Employee.update(updateData,{where:{id:employeeId}});
+    return updatedEmployee;
+    } catch (error) {
+        logger.error('Error updating employee in DB: ' + error.message);
+        if(error instanceof ApiError){
+            throw error
+        }
+        throw new ApiError(400,"Error updating employees"); // Pass error to controller
+    }
+};
+
+const deleteEmployee = async (employeeId) => {
+    try {
+        const employee = await Employee.findByPk(employeeId);
+        if (!employee) {
+            throw new ApiError(404, 'Employee not found');
+        }
+    
+        await employee.destroy();
+        return { message: 'Employee deleted successfully' };
+        
+    } catch (error) {
+        logger.error('Error updating employee in DB: ' + error.message);
+        throw new ApiError(400,"Error updating employees"); // Pass error to controller
+    }
+};
+
+module.exports = { getAllEmployees, createEmployee,updateEmployee,deleteEmployee };
