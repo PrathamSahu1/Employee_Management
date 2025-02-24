@@ -1,7 +1,8 @@
 
-const {Attendance} = require('../database/models/index')
+const {Attendance,Employee} = require('../database/models/index')
 const {ApiError} = require('../errors/apiError')
 const logger = require('../utils/logger')
+const db = require('../database/models')
 
 const markAttendance = async (employeeId, status) => {
     const transaction = await db.sequelize.transaction();
@@ -34,4 +35,30 @@ const markAttendance = async (employeeId, status) => {
     }
 };
 
-module.exports = {markAttendance}
+const getAttendance = async (user) => {
+   
+    try {
+        
+        // If the user is an employee, they can only see their own attendance
+        if (user.role === 'employee') {
+            return await Attendance.findAll({
+                where: { employeeId: user.employeeId },
+                include: { model: Employee, attributes: ['name', 'email'] }
+            });
+        }
+
+        // If Admin or Manager, they can see all attendance records
+        return await Attendance.findAll({
+            include: { model: Employee, attributes: ['name', 'email'] }
+        });
+        
+        
+
+    } catch (error) {
+        
+        throw new ApiError(500, "Error fetching attendance records");
+    }
+};
+
+
+module.exports = {markAttendance,getAttendance}

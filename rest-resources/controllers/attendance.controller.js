@@ -17,4 +17,17 @@ const markAttendance = async (req, res) => {
     }
 };
 
-module.exports = {markAttendance}
+const getAttendance = async (req, res) => {
+    
+    try {
+     
+        const attendanceRecords = await attendanceService.getAttendance(req.user);
+        res.status(201).json(new ApiResponse(201,attendanceRecords,"attendances fetched successfully"));
+
+    } catch (error) {
+        res.status(error.statusCode || 500).json({ error: error.message });
+    }
+};
+
+
+module.exports = {markAttendance,getAttendance}
