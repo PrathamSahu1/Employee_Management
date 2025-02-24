@@ -5,3 +5,11 @@
 {"level":"error","message":"Error updating employee: Error updating employees","timestamp":"2025-02-24T04:41:31.777Z"}
 {"level":"error","message":"Error updating employee in DB: employeeId is not defined","timestamp":"2025-02-24T04:44:16.376Z"}
 {"level":"error","message":"Error updating employee: Error updating employees","timestamp":"2025-02-24T04:44:16.381Z"}
+{"level":"error","message":"Error logging in: Cannot read properties of undefined (reading 'findOne')","timestamp":"2025-02-24T12:16:36.929Z"}
+{"level":"error","message":"Error logging in: Internal server error","timestamp":"2025-02-24T12:16:36.939Z"}
+{"level":"error","message":"Error logging in: Cannot read properties of undefined (reading 'findOne')","timestamp":"2025-02-24T12:20:53.282Z"}
+{"level":"error","message":"Error logging in: Internal server error","timestamp":"2025-02-24T12:20:53.285Z"}
+{"level":"error","message":"Error logging in: Cannot read properties of undefined (reading 'findOne')","timestamp":"2025-02-24T12:43:24.430Z"}
+{"level":"error","message":"Error logging in: Internal server error","timestamp":"2025-02-24T12:43:24.443Z"}
+{"level":"error","message":"Error logging in: Cannot read properties of undefined (reading 'findOne')","timestamp":"2025-02-24T12:45:47.708Z"}
+{"level":"error","message":"Error logging in: Internal server error","timestamp":"2025-02-24T12:45:47.723Z"}

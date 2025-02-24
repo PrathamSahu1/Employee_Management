@@ -6,7 +6,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.js",
     "db:migrate": "dotenv -e .env -- npx sequelize-cli db:migrate",
-  "db:seed": "dotenv -e .env -- npx sequelize-cli db:seed:all"
+    "db:seed": "dotenv -e .env -- npx sequelize-cli db:seed:all"
   },
   "keywords": [],
   "author": "",
@@ -26,5 +26,9 @@
     "sequelize": "^6.37.5",
     "sequelize-cli": "^6.6.2",
     "winston": "^3.17.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.26.4",
+    "@babel/node": "^7.26.0"
   }
 }

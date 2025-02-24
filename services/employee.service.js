@@ -4,7 +4,7 @@ const logger = require('../utils/logger');
 
 const getAllEmployees = async () => {
     try {
-        const employees = await Employee.findAll({ include: Department });
+        const employees = await Employee.findAll({ include: Department, limit:1 });
         logger.info('Fetched all employees');
         return employees;
     } catch (error) {
