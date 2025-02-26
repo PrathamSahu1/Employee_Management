@@ -1,7 +1,8 @@
-const { Employee, Department } = require('../database/models');
-const {ApiError} = require('../errors/apiError')
-const logger = require('../utils/logger');
-const db = require('../database/models')
+import db from '../database/models/index.js';
+import { ApiError } from '../errors/apiError.js';
+import logger from '../utils/logger.js';
+
+const { Employee, Department } = db;
 
 const getAllEmployees = async () => {
    
@@ -71,4 +72,4 @@ const deleteEmployee = async (employeeId) => {
     }
 };
 
-module.exports = { getAllEmployees, createEmployee,updateEmployee,deleteEmployee };
+export default { getAllEmployees, createEmployee,updateEmployee,deleteEmployee };

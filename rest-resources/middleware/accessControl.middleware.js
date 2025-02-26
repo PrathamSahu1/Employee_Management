@@ -8,4 +8,4 @@ const checkRole = (roles) => {
     };
 };
 
-module.exports = {checkRole}
+export {checkRole}

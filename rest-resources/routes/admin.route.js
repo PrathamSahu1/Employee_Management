@@ -1,6 +1,6 @@
-const express = require('express');
-const { authenticate } = require('../middleware/auth');
-const { checkRole } = require('../middleware/accessControl.middleware');
+import express from 'express';
+import { authenticate } from '../middleware/auth.js';
+import { checkRole } from '../middleware/accessControl.middleware.js';
 // const { getUsers, deleteUser } = require('../controllers/adminController');
 
 const router = express.Router();
@@ -8,4 +8,4 @@ const router = express.Router();
 router.get('/users', authenticate, checkRole(['admin']), getUsers);
 router.delete('/users/:id', authenticate, checkRole(['admin']), deleteUser);
 
-module.exports = router;
+export default router;

@@ -1,9 +1,12 @@
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
-const { User } = require('../database/models');
-const logger = require('../utils/logger');;
-const { ApiError } = require('../errors/apiError');
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcryptjs';
+import db from '../database/models/index.js'; 
+import logger from '../utils/logger.js';
+import { ApiError } from '../errors/apiError.js';
+console.log("db.User",db.User)
+const User  = db.User; 
 
+console.log("User",User)
 const secretKey = 'xyz123';
 
 
@@ -43,6 +46,7 @@ const registerUser = async (userData) => {
 
 const loginUser = async (email, password) => {
     try {
+        console.log("db.User",db.User)
         const user = await User.findOne({ where: { email } });
 
         if (!user || !(await bcrypt.compare(password, user.password))) {
@@ -64,4 +68,4 @@ const loginUser = async (email, password) => {
     }
 };
 
-module.exports = {registerUser, loginUser}
+export {registerUser, loginUser}

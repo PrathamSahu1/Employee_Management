@@ -1,8 +1,8 @@
-const express = require('express');
-const { authenticate } = require('../middleware/auth.middleware');
-const { markAttendance,getAttendance } = require('../controllers/attendance.controller');
-const validationSchema = require('../middleware/validateRequest.middleware')
-const attendanceSchema = require('../../json-schemas/attendance.schema')
+import express from 'express';
+import { authenticate } from '../middleware/auth.middleware.js';
+import { markAttendance, getAttendance } from '../controllers/attendance.controller.js';
+import validationSchema from '../middleware/validateRequest.middleware.js';
+import attendanceSchema from '../../json-schemas/attendance.schema.js';
 
 
 const router = express.Router();
@@ -12,4 +12,4 @@ router.post('/', authenticate,validationSchema(attendanceSchema), markAttendance
 router.get('/', authenticate, getAttendance);
 
 
-module.exports = router;
+export default router;

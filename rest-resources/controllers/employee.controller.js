@@ -1,6 +1,6 @@
-const employeeService = require('../../services/employee.service');
-const {ApiResponse} = require('../../errors/apiResponse')
-const logger = require('../../utils/logger');
+import employeeService from '../../services/employee.service.js';
+import { ApiResponse } from '../../errors/apiResponse.js';
+import logger from '../../utils/logger.js';
 
 const getEmployees = async (req, res) => {
     try {
@@ -48,4 +48,4 @@ const deleteEmployee = async (req, res) => {
 
 
 
-module.exports = {getEmployees,addEmployee,updateEmployee,deleteEmployee}
+export {getEmployees,addEmployee,updateEmployee,deleteEmployee}

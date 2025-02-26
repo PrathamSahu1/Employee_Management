@@ -1,6 +1,7 @@
-const authService = require('../../services/auth.service');
-const { ApiResponse } = require('../../errors/apiResponse');
-const logger = require('../../utils/logger');
+import * as authService from '../../services/auth.service.js';
+import { ApiResponse } from '../../errors/apiResponse.js';
+import logger from '../../utils/logger.js';
+
 
 
 const register = async (req, res) => {
@@ -26,4 +27,4 @@ const login = async (req, res) => {
 };
 
 
-module.exports = {register,login}
+export {register,login}

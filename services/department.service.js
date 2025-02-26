@@ -1,6 +1,8 @@
-const { Department } = require('../database/models');
-const logger = require('../utils/logger');
-const { ApiError } = require('../errors/apiError');
+import db from '../database/models/index.js';
+import logger from '../utils/logger.js';
+import { ApiError } from '../errors/apiError.js';
+
+const { Department } = db;
 
 const createDepartment = async (departmentData) => {
     try {
@@ -15,4 +17,4 @@ const createDepartment = async (departmentData) => {
     }
 };
 
-module.exports = { createDepartment };
+export default { createDepartment };

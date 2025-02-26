@@ -1,7 +1,9 @@
-const express = require('express');
+import express from 'express';
+import { createDepartment } from '../controllers/department.controller.js';
+
 const router = express.Router();
-const { createDepartment } = require('../controllers/department.controller');
+
 
 router.post('/', createDepartment);
 
-module.exports = router;
+export default router;

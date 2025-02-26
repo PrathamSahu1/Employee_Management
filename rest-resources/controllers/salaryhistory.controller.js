@@ -1,5 +1,5 @@
-const salaryHistoryService = require('../../services/salaryhistory.service');
-const {ApiResponse} = require('../../errors/apiResponse')
+import salaryHistoryService from '../../services/salaryhistory.service.js';
+import { ApiResponse } from '../../errors/apiResponse.js';
 
 
  //Controller to add a new salary record.
@@ -47,7 +47,7 @@ const getEmployeeSalaryRecords = async (req, res) => {
     }
 };
 
-module.exports = {
+export default {
     addSalaryRecord,
     getAllSalaryRecords,
     getEmployeeSalaryRecords

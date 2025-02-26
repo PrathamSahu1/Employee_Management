@@ -1,9 +1,9 @@
-const express = require('express');
-const { getEmployees, addEmployee,updateEmployee,deleteEmployee } = require('../controllers/employee.controller');
-const { authenticate } = require('../middleware/auth.middleware');
-const { checkRole } = require('../middleware/accessControl.middleware');
-const validationSchema = require('../middleware/validateRequest.middleware')
-const employeeSchema = require('../../json-schemas/employee.schema')
+import express from 'express';
+import { getEmployees, addEmployee, updateEmployee, deleteEmployee } from '../controllers/employee.controller.js';
+import { authenticate } from '../middleware/auth.middleware.js';
+import { checkRole } from '../middleware/accessControl.middleware.js';
+import validationSchema from '../middleware/validateRequest.middleware.js';
+import employeeSchema from '../../json-schemas/employee.schema.js';
 
 const router = express.Router();
 
@@ -12,4 +12,4 @@ router.post('/', authenticate, checkRole(['admin', 'manager']),validationSchema(
 router.patch('/:employeeId', authenticate, checkRole(['admin', 'manager']), updateEmployee);
 router.delete('/:employeeId', authenticate, checkRole(['admin', 'manager']),deleteEmployee);
 
-module.exports = router;
+export default router;

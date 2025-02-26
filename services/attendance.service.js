@@ -1,8 +1,7 @@
-
-const {Attendance,Employee} = require('../database/models/index')
-const {ApiError} = require('../errors/apiError')
-const logger = require('../utils/logger')
-const db = require('../database/models')
+import { ApiError } from '../errors/apiError.js';
+import logger from '../utils/logger.js';
+import db from '../database/models/index.js';
+const { Attendance, Employee } = db;
 
 const markAttendance = async (employeeId, status) => {
     const transaction = await db.sequelize.transaction();
@@ -60,5 +59,5 @@ const getAttendance = async (user) => {
     }
 };
 
-
-module.exports = {markAttendance,getAttendance}
+export default { markAttendance, getAttendance };
+ 

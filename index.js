@@ -1,12 +1,12 @@
-const express = require('express');
-const cors = require('cors');
-require('dotenv').config()
-const db = require('./database/models');
-const authRoutes = require('./rest-resources/routes/auth.route');
-const employeeRoutes = require('./rest-resources/routes/employee.route');
-const departmentRoutes = require('./rest-resources/routes/department.route');
-const attendanceRoutes = require('./rest-resources/routes/attendance.route')
-const salaryhistoryRoutes = require('./rest-resources/routes/salaryhistory.route')
+import express from 'express';
+import cors from "cors"
+import 'dotenv/config';
+import db from './database/models/index.js';
+import authRoutes from './rest-resources/routes/auth.route.js'
+import employeeRoutes from './rest-resources/routes/employee.route.js'
+import departmentRoutes from './rest-resources/routes/department.route.js'
+import attendanceRoutes from './rest-resources/routes/attendance.route.js'
+import salaryhistoryRoutes from './rest-resources/routes/salaryhistory.route.js'
 
 const app = express();
 app.use(cors());

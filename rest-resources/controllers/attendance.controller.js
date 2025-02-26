@@ -1,5 +1,6 @@
-const { ApiResponse } = require('../../errors/apiResponse');
-const attendanceService = require('../../services/attendance.service')
+import { ApiResponse } from '../../errors/apiResponse.js';
+import attendanceService from '../../services/attendance.service.js';
+
 
 
 const markAttendance = async (req, res) => {
@@ -30,4 +31,4 @@ const getAttendance = async (req, res) => {
 };
 
 
-module.exports = {markAttendance,getAttendance}
+export {markAttendance,getAttendance}

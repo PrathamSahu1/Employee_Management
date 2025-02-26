@@ -1,6 +1,7 @@
-const { SalaryHistory, Employee } = require('../database/models');
-const {ApiError} = require('../errors/apiError');
-const db = require('../database/models')
+import db from '../database/models/index.js';
+import { ApiError } from '../errors/apiError.js';
+
+const { SalaryHistory, Employee } = db;
 
 
 /**
@@ -56,7 +57,7 @@ const getEmployeeSalaryRecords = async (employeeId) => {
     }
 };
 
-module.exports = {
+export default {
     addSalaryRecord,
     getAllSalaryRecords,
     getEmployeeSalaryRecords

@@ -1,5 +1,5 @@
-const Ajv = require("ajv");
-const addFormats = require("ajv-formats");
+import Ajv from "ajv";
+import addFormats from 'ajv-formats'
 
 const ajv = new Ajv();
 addFormats(ajv); // Adds support for formats like date-time, email, etc.
@@ -17,4 +17,4 @@ const validateSchema = (schema) => {
     };
 };
 
-module.exports = validateSchema;
+export default validateSchema;

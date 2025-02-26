@@ -1,6 +1,6 @@
-const departmentService = require('../../services/department.service');
-const { ApiResponse } = require('../../errors/apiResponse');
-const logger = require('../../utils/logger');
+import departmentService from '../../services/department.service.js';
+import { ApiResponse } from '../../errors/apiResponse.js';
+import logger from '../../utils/logger.js';
 
 const createDepartment = async (req, res) => {
     try {
@@ -15,4 +15,4 @@ const createDepartment = async (req, res) => {
     }
 };
 
-module.exports = { createDepartment };
+export { createDepartment };
