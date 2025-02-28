@@ -1,34 +1,42 @@
 import { readdirSync } from 'fs';
-import { fileURLToPath } from 'url';
-import path, { join } from 'path';
+import { fileURLToPath, pathToFileURL } from 'url';
+import path, { join, dirname, basename as _basename } from 'path';
 import { Sequelize } from 'sequelize';
 import configFile from '../../config/config.js';
 
+// ✅ Fix for Windows: Convert absolute path to `file://` URL
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirname = dirname(__filename);
 
+const basename = _basename(__filename);
 const env = process.env.NODE_ENV || 'development';
-const config = configFile[env];
+const dbConfig = configFile[env];
 
 const db = {};
 
 let sequelize;
-if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
+if (dbConfig.use_env_variable) {
+  sequelize = new Sequelize(process.env[dbConfig.use_env_variable], dbConfig);
 } else {
-  sequelize = new Sequelize(config.database, config.username, config.password, config);
+  sequelize = new Sequelize(
+    dbConfig.database,
+    dbConfig.username,
+    dbConfig.password,
+    dbConfig
+  );
 }
 
-// Dynamically import models
+// ✅ Fix: Convert Windows paths to `file://` URLs when using `import`
 const modelFiles = readdirSync(__dirname)
-  .filter(file => file !== path.basename(__filename) && file.endsWith('.js'));
+  .filter(file => file.indexOf('.') !== 0 && file !== basename && file.endsWith('.js') || file.endsWith('.cjs'));
 
 for (const file of modelFiles) {
-  const { default: model } = await import(join(__dirname, file));
-  db[model.name] = model(sequelize, Sequelize.DataTypes);
+  const modelPath = pathToFileURL(join(__dirname, file)).href; // Convert path to file URL
+  const { default: modelInit } = await import(modelPath);
+  const model = modelInit(sequelize, Sequelize.DataTypes);
+  db[model.name] = model;
 }
 
-// Set up associations
 Object.keys(db).forEach(modelName => {
   if (db[modelName].associate) {
     db[modelName].associate(db);
@@ -37,5 +45,7 @@ Object.keys(db).forEach(modelName => {
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
+
+// console.log("db",db)
 
 export default db;

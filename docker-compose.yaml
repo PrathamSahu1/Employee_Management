@@ -1,0 +1,29 @@
+services:
+ app:
+  build: .
+  container_name: employeemanagement-app
+  restart: always
+  ports:
+   - 3000:3000
+  depends_on:
+   db:
+    condition: service_healthy
+  env_file:
+   - .env
+  
+ db:
+  image: postgres
+  container_name: employeemanagement-db
+  restart: always
+  ports:
+   - 5432:5432
+  environment:
+   POSTGRES_USER: postgres
+   POSTGRES_PASSWORD: Acrobat@1
+   POSTGRES_DB: EmployeeManagementDB
+  healthcheck:
+   test: ["CMD", "pg_isready", "-U","postgres"]
+   interval: 5s
+   retries: 5
+   start_period: 10s
+   
