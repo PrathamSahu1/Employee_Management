@@ -1,13 +1,10 @@
 import jwt from 'jsonwebtoken';
+import 'dotenv/config';
 import bcrypt from 'bcryptjs';
 import db from '../database/models/index.js'; 
 import logger from '../utils/logger.js';
 import { ApiError } from '../errors/apiError.js';
-console.log("db.User",db.User)
 const User  = db.User; 
-
-console.log("User",User)
-const secretKey = 'xyz123';
 
 
 const registerUser = async (userData) => {
@@ -46,15 +43,15 @@ const registerUser = async (userData) => {
 
 const loginUser = async (email, password) => {
     try {
-        console.log("db.User",db.User)
+        // console.log("db.User",db.User)
         const user = await User.findOne({ where: { email } });
 
         if (!user || !(await bcrypt.compare(password, user.password))) {
             throw new ApiError(401, 'Invalid credentials');
         }
-
+         
         // Generate JWT token
-        const token = jwt.sign({ id: user.id, role: user.role, employeeId: user.employeeId }, secretKey, { expiresIn: '1h' });
+        const token = jwt.sign({ id: user.id, role: user.role, employeeId: user.employeeId }, process.env.SECRET_KEY, { expiresIn: '1h' });
 
         return { message: "Successfully logged in", token };
     } catch (error) {

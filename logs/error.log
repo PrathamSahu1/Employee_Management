@@ -33,3 +33,7 @@
 {"level":"error","message":"Error logging in: Internal server error","timestamp":"2025-02-26T11:11:19.826Z"}
 {"level":"error","message":"Error registering user: Email already registered.","timestamp":"2025-02-26T11:22:40.835Z"}
 {"level":"error","message":"Error registering user: Email already registered.","timestamp":"2025-02-26T11:22:40.836Z"}
+{"level":"error","message":"Error logging in: Invalid credentials","timestamp":"2025-03-01T12:28:34.967Z"}
+{"level":"error","message":"Error logging in: Invalid credentials","timestamp":"2025-03-01T12:28:34.968Z"}
+{"level":"error","message":"Error logging in: Invalid credentials","timestamp":"2025-03-01T12:30:58.055Z"}
+{"level":"error","message":"Error logging in: Invalid credentials","timestamp":"2025-03-01T12:30:58.056Z"}
