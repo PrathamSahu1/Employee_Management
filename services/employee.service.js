@@ -4,13 +4,21 @@ import logger from '../utils/logger.js';
 
 const { Employee, Department } = db;
 
-const getAllEmployees = async () => {
+const getAllEmployees = async (page=1,limit=10) => {
    
     try {
-        const employees = await Employee.findAll({ include: Department, limit:5 });
+        page = parseInt(page);  
+        limit = parseInt(limit); 
+        const offset = (page - 1) * limit;
+        const {count,rows:employees} = await Employee.findAndCountAll({ include: Department, limit, offset });
         logger.info('Fetched all employees');
         
-        return employees;
+        return {
+            totalEmployees: count,
+            totalPages: Math.ceil(count / limit),
+            currentPage: page,
+            employees,
+        };
     } catch (error) {
        
         logger.error('Error fetching employees in DB: ' + error.message);
